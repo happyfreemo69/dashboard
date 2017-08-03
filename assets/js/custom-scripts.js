@@ -6,6 +6,33 @@
 
 (function ($) {
     "use strict";
+
+    var json = {
+        users_nb:16000,
+        users_withPersonalApp:200,
+        users_withProApp:120,
+        ios_install:12,
+        ios_uninstall:5,
+        android_install:5,
+        android_uninstall:2,
+        syndic_scores:[
+            {name:'TI',score:'122',nbIssues:23, nbOffers:22, nbTopics:5},
+            {name:'MG',score:'213',nbIssues:10, nbOffers:5,  nbTopics:3}
+        ],
+        user_talkative:[
+            {name:'bobmoran',score:'55',nbComments:23},
+            {name:'priscilla',score:'108',nbComments:15}
+        ],
+        /*user_angry:[
+            {name:'angryman',score:'22',nbIssues:21},
+            {name:'angrybird',score:'100',nbIssues:10}
+        ],
+        user_social:[
+            {name:'kim',score:'22',nbIssues:21},
+            {name:'elisha',score:'100',nbIssues:10},
+            {name:'elishaB',score:'88',nbIssues:8}
+        ]*/
+    };
     var mainApp = {
 
         initFunction: function () {
@@ -20,43 +47,45 @@
                     $('div.sidebar-collapse').removeClass('collapse')
                 }
             });
+            /* CITYLITY USER STAT
+            -----------------------------------------*/
+            $('#nbUsers').text(json.users_nb);
+            $('#nbUsersPersonal').text(json.users_withPersonalApp);
+            $('#nbUsersPro').text(json.users_withProApp);
+            console.log('GO BOB');
 
             /* MORRIS BAR CHART
 			-----------------------------------------*/
             Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
-                    y: '2006',
+                    y: 'may17',
                     a: 100,
-                    b: 90
+                    b: 90,
+                    c: 22,
+                    d: 10
                 }, {
-                    y: '2007',
+                    y: 'jun17',
                     a: 75,
-                    b: 65
+                    b: 65,
+                    c: 13,
+                    d: 10
                 }, {
-                    y: '2008',
+                    y: 'jul17',
                     a: 50,
-                    b: 40
+                    b: 40,
+                    c: 22,
+                    d: 10
                 }, {
-                    y: '2009',
+                    y: 'aug17',
                     a: 75,
-                    b: 65
-                }, {
-                    y: '2010',
-                    a: 50,
-                    b: 40
-                }, {
-                    y: '2011',
-                    a: 75,
-                    b: 65
-                }, {
-                    y: '2012',
-                    a: 100,
-                    b: 90
+                    b: 65,
+                    c: 22,
+                    d: 10
                 }],
                 xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                ykeys: ['a', 'b', 'c', 'd'],
+                labels: ['new android', 'new ios', 'quit android', 'quit ios'],
                 hideHover: 'auto',
                 resize: true
             });
