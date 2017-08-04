@@ -1,4 +1,4 @@
-set :deploy_to, '/home/deployer/dashboard'
+set :deploy_to, '/home/deployer/dash-front'
 set :user, 'deployer'
 set :pid_file_name, 'dashboard.pid'
 set :branch, 'prd'

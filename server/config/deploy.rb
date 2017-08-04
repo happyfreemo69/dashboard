@@ -39,11 +39,18 @@ namespace :deploy do
     set :branch, tag
   end
 
+  desc 'Install node modules non-globally'
+  task :npm_install do
+    on roles(:app) do
+        execute "cd #{release_path}/server && npm install"
+    end
+  end
+
   desc 'Start application'
   task :start do
     on roles(:app) do
       within current_path do
-        #nothing
+        execute :'forever', 'start --killSignal=SIGINT --append --uid',fetch(:application),'server/app.js'
       end
     end
   end
@@ -52,10 +59,27 @@ namespace :deploy do
   task :stop do
     on roles(:app) do
       within current_path do
-        #nothing
+        execute :'forever', 'stop',fetch(:application)
       end
     end
   end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within current_path do
+        begin
+          Rake::Task['deploy:stop'].invoke
+        rescue => e
+          puts "deploy:stop failed"
+          puts "#{e.class}: #{e.message}"
+        end
+        Rake::Task['deploy:start'].invoke
+      end
+    end
+  end
+
+  before :restart, 'deploy:npm_install'
   after :publishing, :restart
 
   desc 'ensure server is correctly running'
@@ -76,7 +100,7 @@ namespace :deploy do
   desc "Checkout subdirectory and delete all the other stuff"
   task :checkout_subdir do
     on roles(:app) do
-      execute "rm -rf #{release_path}/server"
+      execute "rm -rf #{release_path}/front"
     end
   end
 

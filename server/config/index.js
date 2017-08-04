@@ -6,7 +6,7 @@ var Logger = require('nodelibs').Logger;
  * override this config in privateConfig.js for ... private details
  */
 exports = module.exports;
-exports.port = 4028;
+exports.port = 4029;
 exports.phase = 'dev';
 exports.mode = 'dev';
 exports.host = "http://127.0.0.1:"+exports.port;
