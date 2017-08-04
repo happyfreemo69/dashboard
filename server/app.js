@@ -27,7 +27,7 @@ app.use(function(req, res, next){
 var synty = require('./externalCalls/synty');
 
 app.use(reqLogger(config));
-app.get('/userCounts*', function(req, res, next){
+app.get('/api/userCounts*', function(req, res, next){
     var query = req.url.substring(req.url.indexOf('?')+1);
     return synty.userCounts(querystring.parse(query)).then(x=>{
         return res.status(200).send(x);

@@ -49,10 +49,10 @@
             });
             /* CITYLITY USER STAT
             -----------------------------------------*/
-            $('#nbUsers').text(json.users_nb);
-            $('#nbUsersPersonal').text(json.users_withPersonalApp);
-            $('#nbUsersPro').text(json.users_withProApp);
-            console.log('GO BOB');
+
+            dash.getUserCounts().then(x=>$('#nbUsers').text(x.items[0].count));
+            dash.getHommies().then(x=>$('#nbUsersPro').text(x.items[0].count));
+            dash.getPersonals().then(x=>$('#nbUsersPersonal').text(x.items[0].count));
 
             /* MORRIS BAR CHART
 			-----------------------------------------*/
