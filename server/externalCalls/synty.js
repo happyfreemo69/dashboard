@@ -13,16 +13,22 @@ var ctxHeaders = require('nodelibs')['network/headers']
  * @return {[type]}      [description]
  */
 exports.userCounts = function(opts = {}){
-    var httpModule = config.synty_pri_port == 443 ? https:http;
-    var hommiesStr = '';
-    if('hommies' in opts){
-        hommiesStr = '?hommies='+opts.hommies;
+    var httpModule
+    if(config.synty_pri_port == 443){
+        httpModule = https;
+    }else{
+        httpModule = http;
     }
+    var q = [];
+    'residential' in opts && q.push('residential=1');
+    'tertiary' in opts && q.push('tertiary=1');
+    var query=q.length?'?'+q.join('&'):'';
     return new Promise(function(resolve, reject){
         var req = httpModule.request({
             method:'get',
-            path:'/v1/statUser/userCounts'+hommiesStr,
+            path:'/v1/statUser/userCounts'+query,
             hostname:config.synty_pri_host,
+            port: config.synty_pri_port,
             headers:ctxHeaders.mergeIn({
                 Authorization: 'bearer '+config.hot.statUserToken
             })

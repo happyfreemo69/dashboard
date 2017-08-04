@@ -31,7 +31,7 @@ app.get('/api/userCounts*', function(req, res, next){
     var query = req.url.substring(req.url.indexOf('?')+1);
     return synty.userCounts(querystring.parse(query)).then(x=>{
         return res.status(200).send(x);
-    })
+    }).catch(next)
 })
 
 app.get('/ping', function(req,res,next){

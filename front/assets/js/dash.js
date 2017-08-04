@@ -3,7 +3,6 @@ var dash = (function($, base=''){
 
     function _get(o, url){
         if(!o){o={}}
-            console.log('GOT ', $)
         return $.ajax({
             type: "GET",
             url: opts.base+url,
@@ -15,11 +14,14 @@ var dash = (function($, base=''){
     exports.getUserCounts = function(o={}){
         return _get(o, 'api/userCounts');
     }
-    exports.getHommies = function(o={}){
-        return _get(o, 'api/userCounts?hommies=1');
+    exports.getTertiaryCount = function(o={}){
+        return _get(o, 'api/userCounts?tertiary=1');
     }
-    exports.getPersonals = function(o={}){
-        return _get(o, 'api/userCounts?hommies=0');
+    exports.getResidentialCount = function(o={}){
+        return _get(o, 'api/userCounts?residential=1');
+    }
+    exports.getTertiaryResidentialCount = function(o={}){
+        return _get(o, 'api/userCounts?residential=1&tertiary=1');
     }
     return exports;
 })(jQuery, '/');
