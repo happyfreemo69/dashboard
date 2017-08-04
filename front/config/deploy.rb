@@ -73,6 +73,13 @@ namespace :deploy do
     end
   end
 
+  desc "Checkout subdirectory and delete all the other stuff"
+  task :checkout_subdir do
+    on roles(:app) do
+      execute "rm -rf #{release_path}/server"
+    end
+  end
+
   desc 'get deployed tag'
   task :version do
     on roles(:app), in: :sequence, wait: 5 do
@@ -82,6 +89,7 @@ namespace :deploy do
       end
     end
   end
+  after "deploy:updating", "deploy:checkout_subdir"
   after :start, 'deploy:ping'
   after :started, 'deploy:select_tag'
 end
