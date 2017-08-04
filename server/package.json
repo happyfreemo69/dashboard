@@ -1,0 +1,26 @@
+{
+    "name": "statsfetcher",
+    "version": "1.0.0",
+    "description": "fetch some stats",
+    "author": "mpech",
+    "dependencies": {
+        "nodelibs": "1.9.16",
+        "express": "4.x",
+        "body-parser": "",
+        "method-override":"2.3.1",
+        "express-domain-middleware":"0.1.0",
+        "mocha": "^1.21.4",
+        "optimist":"0.6.1",
+        "bluebird":"3.1.4",
+        "supertest-as-promised":"2.0.2"
+    },
+    "scripts":{
+        "preinstall":"./config/deploy/fetchunpublished.js happyfreemo69/nodelibs"
+    },
+    "devDependencies":{
+        "supertest":  "~0.14.0",
+    	"colors":"1.1.2"
+    },
+    "private":true,
+    "license": "MIT"
+}
